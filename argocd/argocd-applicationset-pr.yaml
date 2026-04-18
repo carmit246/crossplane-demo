@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-app-prs
+  namespace: argocd
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: carmit246
+          repo: crossplane-demo
+          labels:
+            - preview-env
+  template:
+    metadata:
+      name: demo-app-pr-{{branch_slug}}
+      labels:
+        app.kubernetes.io/part-of: demo-app-preview
+        app.kubernetes.io/managed-by: applicationset
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/carmit246/crossplane-demo.git
+        targetRevision: "{{head_sha}}"
+        path: charts/demo-app
+        helm:
+          values: |
+            serviceAccount:
+              create: true
+              name: demo-app-pr-{{branch_slug}}
+            env:
+              awsRegion: us-east-2
+              s3BucketName: carmit-bucket-{{branch_slug}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-app-pr-{{branch_slug}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

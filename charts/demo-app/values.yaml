@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: digitalocean/flask-helloworld
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 5000
+
+containerPort: 5000
+
+serviceAccount:
+  create: false
+  name: demo-app-workload
+
+env:
+  awsRegion: us-east-2
+  s3BucketName: carmit-techgym-bucket
