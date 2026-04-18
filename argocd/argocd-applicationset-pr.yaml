@@ -9,6 +9,9 @@ spec:
         github:
           owner: carmit246
           repo: crossplane-demo
+          tokenRef:
+            secretName: github-token
+            key: token
           labels:
             - preview-env
   template:
