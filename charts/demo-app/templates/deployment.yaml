@@ -18,10 +18,17 @@ spec:
       containers:
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
           env:
+            - name: APP_ENV
+              value: {{ .Values.env.appEnv | quote }}
+            - name: PR_NUMBER
+              value: {{ .Values.env.prNumber | quote }}
+            - name: COMMIT_SHA
+              value: {{ .Values.env.commitSha | quote }}
             - name: AWS_REGION
               value: {{ .Values.env.awsRegion | quote }}
             - name: S3_BUCKET_NAME
