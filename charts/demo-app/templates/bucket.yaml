@@ -6,9 +6,6 @@ metadata:
   annotations:
     crossplane.io/external-name: {{ .Values.env.s3BucketName }}
 spec:
-  providerConfigRef:
-    name: default
-    kind: ProviderConfig
   forProvider:
     region: us-east-2
     tags:
