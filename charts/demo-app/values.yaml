@@ -12,7 +12,7 @@ service:
 containerPort: 8080
 
 serviceAccount:
-  create: false
+  create: true
   name: demo-app-workload
 
 env:
