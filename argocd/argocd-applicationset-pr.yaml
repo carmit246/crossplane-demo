@@ -9,8 +9,12 @@ spec:
         github:
           owner: carmit246
           repo: crossplane-demo
+          tokenRef:
+            secretName: github-token
+            key: token
           labels:
             - preview-env
+        requeueAfterSeconds: 10
   template:
     metadata:
       name: demo-app-pr-{{branch_slug}}
@@ -25,10 +29,16 @@ spec:
         path: charts/demo-app
         helm:
           values: |
+            image:
+              repository: ghcr.io/carmit246/demo-preview-app
+              tag: {{head_sha}}
             serviceAccount:
               create: true
               name: demo-app-pr-{{branch_slug}}
             env:
+              appEnv: preview
+              prNumber: "{{number}}"
+              commitSha: "{{head_sha}}"
               awsRegion: us-east-2
               s3BucketName: carmit-bucket-{{branch_slug}}
       destination:
