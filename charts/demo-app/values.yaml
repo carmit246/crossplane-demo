@@ -1,19 +1,23 @@
 replicaCount: 1
 
 image:
-  repository: digitalocean/flask-helloworld
-  tag: latest
+  repository: ghcr.io/carmit246/demo-preview-app
+  tag: main
+  pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
-  port: 5000
+  port: 8080
 
-containerPort: 5000
+containerPort: 8080
 
 serviceAccount:
   create: false
   name: demo-app-workload
 
 env:
+  appEnv: main
+  prNumber: ""
+  commitSha: main
   awsRegion: us-east-2
   s3BucketName: carmit-techgym-bucket
