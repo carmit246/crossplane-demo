@@ -44,12 +44,12 @@ jobs:
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             PR_NUMBER="${{ github.event.pull_request.number }}"
-            echo "IMAGE_TAG=pr-$PR_NUMBER" >> "$GITHUB_ENV"
-            echo "EXTRA_TAG=${EFFECTIVE_SHA}" >> "$GITHUB_ENV"
+            echo "IMAGE_TAG=${SHORT_SHA}" >> "$GITHUB_ENV"
+            echo "EXTRA_TAG=pr-$PR_NUMBER" >> "$GITHUB_ENV"
             echo "APP_ENV=preview" >> "$GITHUB_ENV"
           else
             echo "IMAGE_TAG=main" >> "$GITHUB_ENV"
-            echo "EXTRA_TAG=${EFFECTIVE_SHA}" >> "$GITHUB_ENV"
+            echo "EXTRA_TAG=${SHORT_SHA}" >> "$GITHUB_ENV"
             echo "APP_ENV=main" >> "$GITHUB_ENV"
           fi
 
