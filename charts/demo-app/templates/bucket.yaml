@@ -1,4 +1,4 @@
-apiVersion: s3.aws.m.upbound.io/v1beta1
+apiVersion: s3.aws.crossplane.io/v1beta1
 kind: Bucket
 metadata:
   name: {{ .Values.env.s3BucketName }}
@@ -6,8 +6,11 @@ metadata:
   annotations:
     crossplane.io/external-name: {{ .Values.env.s3BucketName }}
 spec:
+  providerConfigRef:
+    name: default
+    kind: ProviderConfig
   forProvider:
-    region: us-east-2
+    locationConstraint: us-east-2
     tags:
       demo: crossplane-demo
       owner: devops
