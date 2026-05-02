@@ -1,7 +1,9 @@
-apiVersion: s3.aws.m.upbound.io/v1beta1
+apiVersion: s3.aws.crossplane.io/v1beta1
 kind: Bucket
 metadata:
-  name: carmit-techgym-bucket
+  name: carmit-test-bucket
 spec:
+  providerConfigRef:
+    name: default
   forProvider:
-    region: us-east-2
+    locationConstraint: us-east-2
