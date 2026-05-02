@@ -1,0 +1,8 @@
+apiVersion: iam.aws.crossplane.io/v1beta1
+kind: User
+metadata:
+  name: carmit-techgym-user
+spec:
+  forProvider: {}
+  providerConfigRef:
+    name: default
