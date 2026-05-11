@@ -3,14 +3,11 @@ kind: Bucket
 metadata:
   name: {{ .Values.env.s3BucketName }}
   namespace: crossplane-system
-  annotations:
-    crossplane.io/external-name: {{ .Values.env.s3BucketName }}
 spec:
   providerConfigRef:
     name: default
-    kind: ProviderConfig
   forProvider:
-    locationConstraint: us-east-2
+    region: us-east-2
     tags:
       demo: crossplane-demo
       owner: devops
