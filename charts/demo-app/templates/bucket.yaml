@@ -6,6 +6,7 @@ metadata:
 spec:
   providerConfigRef:
     name: default
+    kind: ProviderConfig
   forProvider:
     region: us-east-2
     tags:
