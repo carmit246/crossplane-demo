@@ -1,0 +1,11 @@
+apiVersion: iam.aws.crossplane.io/v1beta1
+kind: UserPolicyAttachment
+metadata:
+  name: carmit-techgym-user
+spec:
+  forProvider:
+    userNameRef:
+      name: carmit-techgym-user
+    policyArn: "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  providerConfigRef:
+    name: default
