@@ -5,4 +5,4 @@ metadata:
   namespace: crossplane-system
 spec:
   forProvider:
-    locationConstraint: us-east-2
+    region: us-east-2
