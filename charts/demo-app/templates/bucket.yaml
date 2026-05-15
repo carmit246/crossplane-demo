@@ -1,10 +1,8 @@
-apiVersion: s3.aws.crossplane.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   name: {{ .Values.env.s3BucketName }}
   namespace: crossplane-system
 spec:
-  providerConfigRef:
-    name: default
   forProvider:
-    locationConstraint: us-east-2
+    region: us-east-2
